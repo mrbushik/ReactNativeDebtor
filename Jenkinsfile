@@ -23,7 +23,7 @@
           stage('EAS Build') {
               steps {
                   withCredentials([string(
-                      credentialsId: 'expo-token',
+                      credentialsId: 'EXPO_TOKEN',
                       variable: 'EXPO_TOKEN'
                   )]) {
                       sh '''
