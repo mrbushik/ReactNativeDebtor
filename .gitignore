@@ -2,6 +2,7 @@ node_modules
 .expo
 .tsbuild
 .npm-cache
+coverage
 
 .env
 .env.local
