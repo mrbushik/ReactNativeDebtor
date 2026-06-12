@@ -5,7 +5,7 @@ import type { Debt } from "../../Shared/Types/Debt";
 type GetHistoryParams = {
   userId: string;
   sortBy?: string;
-  order?: "asc" | "desc";
+  order?: "asc" | "dest";
 };
 
 export const historyApi = baseApi.injectEndpoints({

@@ -65,11 +65,14 @@ const refreshAuthSession = async (): Promise<PersistedAuthSession | null> => {
     return null;
   }
 
-  const { data } = await refreshClient.get<RefreshResponse>(apiRoutes.auth.refresh, {
-    headers: {
-      refreshToken,
+  const { data } = await refreshClient.get<RefreshResponse>(
+    apiRoutes.auth.refresh,
+    {
+      headers: {
+        refreshToken,
+      },
     },
-  });
+  );
 
   const nextSession: PersistedAuthSession = {
     accessToken: data.accessToken ?? data.token ?? null,

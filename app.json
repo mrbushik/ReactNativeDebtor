@@ -9,7 +9,16 @@
     },
     "platforms": ["ios", "android", "web"],
     "scheme": "reactnativedebtor",
-    "plugins": [],
+    "plugins": [
+      "@react-native-community/datetimepicker",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow ReactNativeDebtor to use your location to confirm that the service is available in your region."
+        }
+      ],
+      "expo-secure-store"
+    ],
     "userInterfaceStyle": "automatic",
     "assetBundlePatterns": ["**/*"],
     "extra": {

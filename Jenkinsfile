@@ -3,6 +3,7 @@
 
       environment {
           NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+          CI = "true"
       }
 
       stages {
@@ -14,9 +15,31 @@
               }
           }
 
-          stage('Validate') {
+          stage('Quality') {
               steps {
-                  sh 'npx expo-doctor || true'
+                  sh 'npm run typecheck'
+                  sh 'npm run lint'
+                  sh 'npm run format:check'
+              }
+          }
+
+          stage('Test') {
+              steps {
+                  sh 'npm run test:ci'
+              }
+              post {
+                  always {
+                      archiveArtifacts(
+                          artifacts: 'coverage/**',
+                          allowEmptyArchive: true
+                      )
+                  }
+              }
+          }
+
+          stage('Expo Validate') {
+              steps {
+                  sh 'npx expo-doctor'
               }
           }
 

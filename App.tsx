@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  ActivityIndicator,
-  ImageBackground,
-  StyleSheet,
-  View,
-} from "react-native";
+import { ActivityIndicator, ImageBackground, StyleSheet } from "react-native";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import AppStack from "./src/Navigation/AppStack";
 import AuthStack from "./src/Navigation/AuthStack";
 import {
   AppProvider,
@@ -19,6 +13,11 @@ import {
   useAppSelector,
 } from "./src/Store";
 import { AppDrawer } from "./src/Widgets/AppDrawer/AppDrawer";
+import {
+  CountryBlockedScreen,
+  LocationCheckingScreen,
+  useLocationAccess,
+} from "./src/Features/LocationAccess";
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -32,16 +31,26 @@ function AppNavigator() {
   const dispatch = useAppDispatch();
   const isHydrated = useAppSelector(selectIsAuthHydrated);
   const isLoggedIn = useAppSelector(selectIsAuthenticated);
+  const { status, retryLocationAccess, shouldOpenSettings } =
+    useLocationAccess();
 
   React.useEffect(() => {
     dispatch(hydrateAuth());
   }, [dispatch]);
 
   if (!isHydrated) {
+    return <ActivityIndicator />;
+  }
+  if (status === "checking") {
+    return <LocationCheckingScreen />;
+  }
+  if (status !== "allowed") {
     return (
-      <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#ffffff" />
-      </View>
+      <CountryBlockedScreen
+        status={status}
+        onRetry={retryLocationAccess}
+        shouldOpenSettings={shouldOpenSettings}
+      />
     );
   }
 

@@ -4,15 +4,10 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strict": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "outDir": ".tsbuild",
     "rootDir": ".",
     "skipLibCheck": true
   },
-  "include": [
-    "scripts/**/*.mts",
-    "scripts/**/*.cts"
-  ]
+  "include": ["scripts/**/*.mts", "scripts/**/*.cts"]
 }

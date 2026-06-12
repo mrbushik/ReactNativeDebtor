@@ -13,3 +13,29 @@ export const getDebtApi = baseApi.injectEndpoints({
   }),
 });
 export const { useGetDebtQuery } = getDebtApi;
+
+export type AddDebtRequest = {
+  lenderId: string;
+  debtorName: string;
+  debtorInfo?: string;
+  debtAmount: number;
+  refundAmount: number;
+  debtDate?: string;
+  dueDate?: string | null;
+  withoutDetails: boolean;
+  isReturned: boolean;
+};
+
+export const addDebtApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    addDebt: builder.mutation<Debt, AddDebtRequest>({
+      query: (body) => ({
+        url: apiRoutes.debt.add,
+        method: "POST",
+        data: body,
+      }),
+      invalidatesTags: ["Overview"],
+    }),
+  }),
+});
+export const { useAddDebtMutation } = addDebtApi;

@@ -88,7 +88,7 @@ const LoginForm = () => {
         </View>
         <View style={styles.registerContainer}>
           <Text style={styles.registerText}>
-            Don't have an account?{" "}
+            {"Don't have an account? "}
             <Text style={styles.registerBtn}>Register now</Text>
           </Text>
         </View>

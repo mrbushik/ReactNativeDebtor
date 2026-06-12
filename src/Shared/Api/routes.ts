@@ -8,6 +8,7 @@ export const apiRoutes = {
   },
   debt: {
     get: "/current-debt",
+    add: "/add-debt",
   },
   history: {
     get: "/user-debts",

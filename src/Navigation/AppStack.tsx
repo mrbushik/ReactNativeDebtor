@@ -4,11 +4,13 @@ import Debt from "../Screens/Debt/Debt";
 import History from "../Screens/History/History";
 import AppMenu from "../Features/AppMenu/AppMenu";
 import { Colors } from "../Shared/Styles/Colors";
+import AddDebt from "../Screens/AddDebt/AddDebt";
 
 export type AppStackParamList = {
   Main: undefined;
   Debt: { debtId: string };
   History: undefined;
+  AddDebt: undefined;
 };
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
@@ -41,6 +43,14 @@ export default function AppStack() {
       <Stack.Screen
         name="History"
         component={History}
+        options={{
+          headerTitle: "Your Debtor",
+          headerLeft: () => <AppMenu />,
+        }}
+      />
+      <Stack.Screen
+        name="AddDebt"
+        component={AddDebt}
         options={{
           headerTitle: "Your Debtor",
           headerLeft: () => <AppMenu />,

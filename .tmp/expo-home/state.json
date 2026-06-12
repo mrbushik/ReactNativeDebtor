@@ -1,3 +1,9 @@
 {
-  "uuid": "86afe503-53bc-4092-acc1-76cf00fdfda4"
+  "uuid": "86afe503-53bc-4092-acc1-76cf00fdfda4",
+  "auth": {
+    "sessionSecret": "{\"id\":\"45f2134c-73cf-4608-8a61-4586201a2a12\",\"version\":2}",
+    "userId": "c0da1c6a-eaf7-4484-9aeb-c9eb87dfe46a",
+    "username": "mrbushik",
+    "currentConnection": "Username-Password-Authentication"
+  }
 }

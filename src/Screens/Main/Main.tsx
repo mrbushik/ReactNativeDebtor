@@ -1,5 +1,5 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import type { AppStackParamList } from "../../Navigation/AppStack";
 import Overview from "../../Features/Overview/Overview";
 

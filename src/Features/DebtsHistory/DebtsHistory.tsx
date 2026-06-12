@@ -6,7 +6,7 @@ import { useGetHistoryQuery } from "../../Store/api/historyApi";
 import DebtCard from "../../Widgets/DebtCard/DebtCard";
 import { Colors } from "../../Shared/Styles/Colors";
 const DebtsHistory = () => {
-  const [order, setOrder] = useState<"asc" | "desc">();
+  const [order, setOrder] = useState<"asc" | "dest">();
   const [sortBy, setSortBy] = useState<string>("");
   const userData = useAppSelector((state) => state.auth.user);
 
@@ -20,21 +20,70 @@ const DebtsHistory = () => {
       skip: !userData?._id,
     },
   );
+
+  const handleSort = (sortBy: string) => {
+    if (sortBy === "dest") {
+      setOrder("dest");
+    } else {
+      setOrder("asc");
+    }
+    setSortBy("refundAmount");
+  };
+
+  const handleReset = () => {
+    setOrder(undefined);
+    setSortBy("");
+  };
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.container}>
         <Text style={styles.title}>Debts History</Text>
         <View style={styles.btnContainer}>
-          <Pressable style={[styles.btn, styles.selectedBtn]}>
-            <Text style={[styles.btnText, styles.selectedBtnText]}>
+          <Pressable
+            style={!order ? [styles.btn, styles.selectedBtn] : styles.btn}
+            onPress={handleReset}
+          >
+            <Text
+              style={
+                !order
+                  ? [styles.btnText, styles.selectedBtnText]
+                  : styles.btnText
+              }
+            >
               Without
             </Text>
           </Pressable>
-          <Pressable style={styles.btn}>
-            <Text style={styles.btnText}>Increasing</Text>
+          <Pressable
+            style={
+              order === "asc" ? [styles.btn, styles.selectedBtn] : styles.btn
+            }
+            onPress={() => handleSort("asc")}
+          >
+            <Text
+              style={
+                order === "asc"
+                  ? [styles.btnText, styles.selectedBtnText]
+                  : styles.btnText
+              }
+            >
+              Increasing
+            </Text>
           </Pressable>
-          <Pressable style={styles.btn}>
-            <Text style={styles.btnText}>Decreasing</Text>
+          <Pressable
+            style={
+              order === "dest" ? [styles.btn, styles.selectedBtn] : styles.btn
+            }
+            onPress={() => handleSort("dest")}
+          >
+            <Text
+              style={
+                order === "dest"
+                  ? [styles.btnText, styles.selectedBtnText]
+                  : styles.btnText
+              }
+            >
+              Decreasing
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -92,7 +141,7 @@ const styles = StyleSheet.create({
   btn: {
     width: 100,
     backgroundColor: Colors.white,
-    padding: 10,
+    padding: 7,
     borderRadius: 5,
   },
   btnText: {
@@ -101,14 +150,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   btnContainer: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     marginTop: 16,
   },
   selectedBtn: {
     backgroundColor: Colors.pink,
-    padding: 10,
+    padding: 7,
     borderRadius: 5,
   },
   selectedBtnText: {

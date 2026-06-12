@@ -1,9 +1,17 @@
-import fs from 'node:fs';
-import { EventEmitter } from 'node:events';
+import fs from "node:fs";
+import { EventEmitter } from "node:events";
 
 type Watcher = fs.FSWatcher & EventEmitter;
-type WatchCallback = (eventType: string, filename: string | Buffer | null) => void;
-type WatchOptions = fs.WatchOptions | BufferEncoding | 'buffer' | null | undefined;
+type WatchCallback = (
+  eventType: string,
+  filename: string | Buffer | null,
+) => void;
+type WatchOptions =
+  | fs.WatchOptions
+  | BufferEncoding
+  | "buffer"
+  | null
+  | undefined;
 
 const originalWatch = fs.watch.bind(fs);
 
@@ -23,16 +31,21 @@ fs.watch = function patchedWatch(
   let watchOptions = options;
   let callback = listener;
 
-  if (typeof watchOptions === 'function') {
+  if (typeof watchOptions === "function") {
     callback = watchOptions;
     watchOptions = undefined;
   }
 
-  if (watchOptions && typeof watchOptions === 'object' && 'recursive' in watchOptions && watchOptions.recursive) {
+  if (
+    watchOptions &&
+    typeof watchOptions === "object" &&
+    "recursive" in watchOptions &&
+    watchOptions.recursive
+  ) {
     const watcher = createNoopWatcher();
 
-    if (typeof callback === 'function') {
-      watcher.on('change', callback);
+    if (typeof callback === "function") {
+      watcher.on("change", callback);
     }
 
     return watcher;

@@ -15,7 +15,9 @@ export const getApiErrorMessage = (
   }
 
   if (!isApiError(error)) {
-    return typeof error.message === "string" ? error.message : "Request failed.";
+    return typeof error.message === "string"
+      ? error.message
+      : "Request failed.";
   }
 
   if (typeof error.data === "string") {

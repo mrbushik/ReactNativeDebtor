@@ -67,24 +67,25 @@ export const saveAuthSession = async (session: PersistedAuthSession) => {
   }
 };
 
-export const loadAuthSession = async (): Promise<PersistedAuthSession | null> => {
-  try {
-    const rawSession = await loadFromStorage();
+export const loadAuthSession =
+  async (): Promise<PersistedAuthSession | null> => {
+    try {
+      const rawSession = await loadFromStorage();
 
-    if (!rawSession) {
+      if (!rawSession) {
+        setAuthSession(null);
+        return null;
+      }
+
+      const session = JSON.parse(rawSession) as PersistedAuthSession;
+      setAuthSession(session);
+
+      return session;
+    } catch {
       setAuthSession(null);
       return null;
     }
-
-    const session = JSON.parse(rawSession) as PersistedAuthSession;
-    setAuthSession(session);
-
-    return session;
-  } catch {
-    setAuthSession(null);
-    return null;
-  }
-};
+  };
 
 export const clearAuthSession = async () => {
   setAuthSession(null);

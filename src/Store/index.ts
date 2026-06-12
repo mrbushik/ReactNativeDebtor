@@ -1,4 +1,6 @@
 export { useLoginMutation } from "./api/authApi";
+export { useAddDebtMutation } from "./api/debtApi";
+export type { AddDebtRequest } from "./api/debtApi";
 export { useGetOverviewQuery } from "./api/overviewApi";
 export { store } from "./config/store";
 export type { AppDispatch, RootState } from "./config/store";

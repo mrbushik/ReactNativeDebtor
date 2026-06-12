@@ -16,6 +16,7 @@ export const overviewApi = baseApi.injectEndpoints({
         url: `${apiRoutes.overview.get}/${userId}`,
         method: "GET",
       }),
+      providesTags: ["Overview"],
     }),
   }),
 });
