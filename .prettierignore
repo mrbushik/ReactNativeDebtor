@@ -1,0 +1,7 @@
+.expo
+.tmp
+.tsbuild
+coverage
+node_modules
+package-lock.json
+assets
