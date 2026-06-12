@@ -3,6 +3,7 @@
 .tsbuild
 coverage
 reports
+builds
 node_modules
 package-lock.json
 assets

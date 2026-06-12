@@ -4,6 +4,7 @@ node_modules
 .npm-cache
 coverage
 reports
+builds
 
 .env
 .env.local
