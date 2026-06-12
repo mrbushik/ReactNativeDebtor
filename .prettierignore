@@ -2,6 +2,7 @@
 .tmp
 .tsbuild
 coverage
+reports
 node_modules
 package-lock.json
 assets

@@ -58,12 +58,23 @@
     "eslint-config-expo": "~10.0.0",
     "jest": "~29.7.0",
     "jest-expo": "~54.0.17",
+    "jest-junit": "^17.0.0",
     "prettier": "3.8.3",
     "typescript": "~5.9.2"
   },
   "jest": {
     "preset": "jest-expo",
     "cacheDirectory": "<rootDir>/.tmp/jest-cache",
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "<rootDir>/reports",
+          "outputName": "junit.xml"
+        }
+      ]
+    ],
     "watchman": false
   }
 }

@@ -3,6 +3,7 @@ node_modules
 .tsbuild
 .npm-cache
 coverage
+reports
 
 .env
 .env.local
